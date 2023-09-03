@@ -29,3 +29,7 @@
 /Users/leechangmin/ChatMvc/obj/Debug/net7.0/ChatMvc.pdb
 /Users/leechangmin/ChatMvc/obj/Debug/net7.0/ChatMvc.genruntimeconfig.cache
 /Users/leechangmin/ChatMvc/obj/Debug/net7.0/ref/ChatMvc.dll
+/Users/leechangmin/ChatMvc/bin/Debug/net7.0/System.Net.Http.Formatting.dll
+/Users/leechangmin/ChatMvc/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/leechangmin/ChatMvc/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll
+/Users/leechangmin/ChatMvc/obj/Debug/net7.0/ChatMvc.csproj.CopyComplete
