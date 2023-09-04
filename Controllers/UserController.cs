@@ -26,7 +26,7 @@ public class UserController : Controller
         if (ModelState.IsValid)
         {
             await _userService.PostUser(user);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "User");
         }
         return View(user);
     }
@@ -34,5 +34,26 @@ public class UserController : Controller
     public ActionResult Login()
     {
         return View();
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Login(User user)
+    {
+        if (ModelState.IsValid)
+        {
+            var response = await _userService.Login(user);
+            if (response.IsSuccessStatusCode)
+            {
+                // Request.H
+                return Home();
+            }
+
+        }
+        return View(user);
+    }
+
+    public ActionResult Home()
+    {
+        return RedirectToAction("Index", "Home");
     }
 }
