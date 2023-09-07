@@ -1,4 +1,4 @@
-using System.Net.Http.Headers;
+using System.Security.Claims;
 using ChatMvc.Models;
 using ChatMvc.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ public class UserController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult> Signup(User user)
+    public async Task<ActionResult> Signup(UserViewModel user)
     {   
         if (ModelState.IsValid)
         {
@@ -37,14 +37,15 @@ public class UserController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult> Login(User user)
+    public async Task<ActionResult> Login(UserViewModel user)
     {
         if (ModelState.IsValid)
         {
             var response = await _userService.Login(user);
             if (response.IsSuccessStatusCode)
             {
-                // Request.H
+                var accessToken = response.Headers.GetValues("Jwt").FirstOrDefault();
+                HttpContext.Response.Cookies.Append("Jwt", accessToken);
                 return Home();
             }
 
@@ -55,5 +56,11 @@ public class UserController : Controller
     public ActionResult Home()
     {
         return RedirectToAction("Index", "Home");
+    }
+
+    public ActionResult Logout()
+    {
+        HttpContext.Response.Cookies.Delete("Jwt");
+        return Home();
     }
 }

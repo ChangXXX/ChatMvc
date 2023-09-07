@@ -7,6 +7,7 @@ namespace ChatMvc.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private bool _isLogin = false;
 
     public HomeController(ILogger<HomeController> logger)
     {
@@ -14,7 +15,7 @@ public class HomeController : Controller
     }
 
     public IActionResult Index()
-    {
+    {   
         return View();
     }
 

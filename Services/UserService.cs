@@ -1,4 +1,7 @@
 
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Security.Principal;
 using ChatMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +19,7 @@ public class UserService
         _httpClient = httpClient;
     }
 
-    public async Task PostUser(User user)
+    public async Task PostUser(UserViewModel user)
     {
         using HttpResponseMessage response = await _httpClient.PostAsJsonAsync(
             _location,
@@ -24,11 +27,8 @@ public class UserService
         );
     }
 
-    public async Task<HttpResponseMessage> Login(User user) {
+    public async Task<HttpResponseMessage> Login(UserViewModel user) {
         var res = await _httpClient.GetAsync(_location + $"{user.Name}/{user.Pwd}");
-        var accessToken = res.Headers.GetValues("Jwt").FirstOrDefault();
-        Console.WriteLine($"Token ::: {accessToken}");
-        _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
         return res;
     }
 }
